@@ -1,0 +1,80 @@
+﻿@model IEnumerable<MySchoolProj.Models.Reservations>
+
+@{
+    ViewBag.Title = "My Courses";
+}
+
+<h2>My Courses</h2>
+@if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+{
+    <p>
+        @Html.ActionLink("Add student to course", "Create")
+    </p>
+}
+<table class="table">
+    <tr>
+        @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+        {
+            <th>
+                Student Email
+            </th>
+        }
+        <th>
+            Course's Name
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (User.Identity.Name == item.AspNetUser.Email && User.IsInRole("Student"))
+        {
+            <tr>
+
+                
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cours.Name)
+                </td>
+
+                <td>
+                  
+
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+
+                   
+                </td>
+
+            </tr>
+        }
+
+        else if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cours.Name)
+                </td>
+
+                <td>
+                   
+                        @Html.ActionLink("Edit |", "Edit", new { id = item.Id })
+                    
+
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+
+                  
+                        @Html.ActionLink("| Delete", "Delete", new { id = item.Id })
+                   
+
+                </td>
+
+            </tr>
+        }
+    }
+
+</table>

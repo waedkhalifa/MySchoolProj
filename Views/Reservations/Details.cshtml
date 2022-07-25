@@ -1,0 +1,55 @@
+﻿@model MySchoolProj.Models.Reservations
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Reservations</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+        {
+            <dt>
+                Student Email
+            </dt>
+
+
+            <dd>
+                @Html.DisplayFor(model => model.AspNetUser.Email)
+            </dd>
+        }
+        <dt>
+            Course Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cours.Name)
+        </dd>
+        <dt>
+            Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cours.Description)
+        </dd>
+
+        <dt>
+            Length (in months)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cours.Length)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+    {
+        @Html.ActionLink("Edit |", "Edit", new { id = Model.Id })
+                                                                }
+@Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<MySchoolProj.Models.UserViewModel>
+
+@{
+    ViewBag.Title = "Teachers";
+}
+
+<h2>Teachers</h2>
+
+<p>
+    @Html.ActionLink("Add new teacher", "Register", "Account")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            First Name
+        </th>
+        <th>
+           Last Name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+
+        <th>
+           Age
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Role)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @if(item.Role=="Teacher"){
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "alluser", new { id = item.Id }, null) |
+                @Html.ActionLink("Details", "Details", "alluser", new { id = item.Id }, null) |
+                @Html.ActionLink("Delete", "Delete", "alluser", new { id = item.Id }, null)
+            </td>
+            }
+        </tr>
+    }
+
+</table>
